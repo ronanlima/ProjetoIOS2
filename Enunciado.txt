@@ -1,0 +1,61 @@
+Conteúdo do exercício
+
+Trabalho Final iOS II
+
+
+
+O trabalho final consiste em:
+
+
+
+-Utilizar TableViews para todas as telas do app (exceto a do mapa). Sugestão:
+
+A tela de login e cadastro é mais simples utilizar uma TableviewController com células estáticas
+
+
+
+-Fazer a validação de campos preenchidos na tela de Login e de cadastro
+
+
+
+-Fazer a navegação da tela de login para o fluxo de usuário logado sem a possibilidade de log out por uma navigation bar (exercício de aula)
+
+
+
+No fluxo logado:
+
+
+
+-Utilizar uma TableviewController ou uma UIViewController para a tela de Lista de filmes, Filmes Favoritos e Detalhe de filme. Essas tableviews não devem conter células estáticas. Devem ser dynamic prototypes. O conteúdo delas deve ser preenchido por uma controller. Seguindo o MVC visto em sala.
+
+
+
+-Criar uma Model do Filme que possui um:
+
+-Nome
+
+-Tagline
+
+-Nome do poster
+
+-Descrição
+
+-Nota
+
+-Duração
+
+-Ano de lançamento
+
+-Localização
+
+
+
+-Criar uma tela com um mapa que exibe a localização atual do usuário além da localização de Filmes. Esses filmes vão ser criados em uma Controller que possui uma lista [Filmes] e cada filime tem a sua licalização. A princípio esses dados serão simulados, criados por vocês. 
+
+
+
+-O autolayout de todas as telas será avaliado para adaptar para diferentes tamanhos
+
+
+
+-As imagens em anexo servem para guiar a criação de telas
