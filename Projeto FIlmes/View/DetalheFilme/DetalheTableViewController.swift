@@ -7,6 +7,42 @@
 //
 
 import UIKit
+import Foundation
+
+//class FilmeTeste : Codable {
+//    var adult: Bool?
+//    var backdrop_path: String?
+//    var budget: Int?
+//
+//    enum CodingKeys: String, CodingKey {
+//        case adulto = "adult"
+//        case imagem = "backdrop_path"
+//        case orcamento = "budget"
+//    }
+//}
+
+class VaiSeFuder: Codable {
+    var adulto: Bool?
+    var poster: String?
+    var orcamento: Int?
+    
+    enum CodingKeys: String, CodingKey {
+        case adulto = "adult"
+        case poster = "backdrop_path"
+        case orcamento = "budget"
+    }
+    
+    convenience required init(from decoder: Decoder) throws {
+        self.init()
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let adultoServer = try container.decode(Bool.self, forKey: .adulto)
+        let posterServer = try container.decode(String.self, forKey: .poster)
+        let orcamentoServer = try container.decode(Int.self, forKey: .orcamento)
+        self.adulto = adultoServer
+        self.poster = posterServer
+        self.orcamento = orcamentoServer
+    }
+}
 
 class DetalheFilmeController {
     var filme: Filme?
@@ -59,6 +95,27 @@ class DetalheTableViewController: UITableViewController {
         tableView.register(cellXib, forCellReuseIdentifier: "filmeCell")
         // carregar informacoes do filme
         controller?.initDetalhes()
+        
+        // parte de requisição não precisa para o trabalho de iOS 2
+        guard let url = URL(string: "https://api.themoviedb.org/3/movie/550?api_key=0e59d0d4cebf9cd24c581b082db608fe") else {
+            return
+        }
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard let data = data else {
+                return
+            }
+            let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
+            let dict = json as? Dictionary<String, Any>
+            print("oi")
+            
+            var decoder = JSONDecoder()
+            var filmeT = try? decoder.decode(VaiSeFuder.self, from: data)
+            print(filmeT?.adulto)
+            print(filmeT?.poster)
+            print(filmeT?.orcamento)
+            
+        }
+        task.resume()
     }
 
     // MARK: - Table view data source
