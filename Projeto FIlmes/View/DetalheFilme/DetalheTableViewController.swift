@@ -54,8 +54,8 @@ class DetalheFilmeController {
     
     init(_ f: Filme?) {
         self.filme = f
-        filmesRelacionados.append(Filme("Avatar","A aventura começa", nil))
-        filmesRelacionados.append(Filme("Avatar 2 ","A aventura continua", nil))
+        filmesRelacionados.append(Filme("Avatar","A aventura começa", "avatar-i"))
+        filmesRelacionados.append(Filme("Avatar 2 ","A aventura continua", "avatar-ii"))
     }
     
     func initDetalhes() {

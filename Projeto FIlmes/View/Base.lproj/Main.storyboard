@@ -283,6 +283,7 @@
                     <navigationItem key="navigationItem" title="Favoritos" id="2rY-LE-co5"/>
                     <connections>
                         <outlet property="headerView" destination="qJO-fn-cfm" id="8Zz-uQ-ePq"/>
+                        <outlet property="userAvatar" destination="BS3-pf-BE0" id="2BH-sm-ICl"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RjI-KI-fUO" userLabel="First Responder" sceneMemberID="firstResponder"/>

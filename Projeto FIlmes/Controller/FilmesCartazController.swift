@@ -9,9 +9,9 @@
 import Foundation
 
 class FilmesCartazController {
-    private var filmes = [Filme("Avengers", "Infinity war", "add-big"),
-                          Filme("MIB", "Homens de preto", nil),
-                          Filme("X-men", "Fenix negra", nil)]
+    private var filmes = [Filme("Avengers", "Infinity war", "infinity-war"),
+                          Filme("MIB", "Homens de preto", "mib"),
+                          Filme("X-men", "Fenix negra", "x-men")]
     func filme(index: Int) -> Filme? {
         if (existeIndex(index)) {
             return filmes[index]

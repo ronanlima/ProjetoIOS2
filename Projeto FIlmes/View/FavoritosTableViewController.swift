@@ -9,17 +9,14 @@
 import UIKit
 
 class FavoritosTableViewController: UITableViewController {
-    
+    var controller = FilmesFavoritosController()
     @IBOutlet var headerView: UIView!
+    @IBOutlet weak var userAvatar: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        let cellXib = UINib(nibName: "MovieTableViewCell", bundle: nil)
+        tableView.register(cellXib, forCellReuseIdentifier: "cell")
     }
 
     // MARK: - Table view data source
@@ -30,6 +27,7 @@ class FavoritosTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        userAvatar.image = UIImage(named: "user")
         return headerView
     }
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -37,25 +35,27 @@ class FavoritosTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 10
+        return controller.qtdFilmes
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
-        cell?.backgroundColor = .red
-        return cell!
-    }
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cellXib = tableView.dequeueReusableCell(withIdentifier: "cell")
+        guard let cell = cellXib as? MovieTableViewCell else { return UITableViewCell() }
+        cell.titulo.text = controller.nome(paraFilmeEm: indexPath.row)
+        cell.tagline.text = controller.tagline(paraFilmeEm: indexPath.row)
+        if let poster = controller.nomePoster(paraFilmeEm: indexPath.row) {
+            cell.poster.image = UIImage(named: poster)
+        }
         return cell
     }
-    */
 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detalheViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "detalheVC") as? DetalheTableViewController
+        if let dvc = detalheViewController {
+            dvc.filme = controller.filme(index: indexPath.row)
+            self.navigationController?.pushViewController(dvc, animated: true)
+        }
+    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
